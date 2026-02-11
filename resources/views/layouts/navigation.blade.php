@@ -15,6 +15,32 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    
+                    @auth
+                        @if(in_array(Auth::user()->role, ['owner', 'co_admin']))
+                            <x-nav-link :href="route('enterprise.dashboard')" :active="request()->routeIs('enterprise.dashboard')">
+                                {{ __('Enterprise') }}
+                            </x-nav-link>
+                        @endif
+                        
+                        @if(in_array(Auth::user()->role, ['owner', 'co_admin', 'resort_manager']))
+                            <x-nav-link :href="route('shyren-bugak.dashboard')" :active="request()->routeIs('shyren-bugak.dashboard')">
+                                {{ __('Resort') }}
+                            </x-nav-link>
+                        @endif
+                        
+                        @if(in_array(Auth::user()->role, ['owner', 'co_admin', 'hotel_manager']))
+                            <x-nav-link :href="route('lsv-hotel.dashboard')" :active="request()->routeIs('lsv-hotel.dashboard')">
+                                {{ __('Hotel') }}
+                            </x-nav-link>
+                        @endif
+                        
+                        @if(in_array(Auth::user()->role, ['owner', 'co_admin', 'agri_manager']))
+                            <x-nav-link :href="route('lsv-agri.dashboard')" :active="request()->routeIs('lsv-agri.dashboard')">
+                                {{ __('Agri') }}
+                            </x-nav-link>
+                        @endif
+                    @endauth
                 </div>
             </div>
 
@@ -70,6 +96,33 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            
+            {{-- ADD THIS: Mobile menu items --}}
+            @auth
+                @if(in_array(Auth::user()->role, ['owner', 'co_admin']))
+                    <x-responsive-nav-link :href="route('enterprise.dashboard')" :active="request()->routeIs('enterprise.dashboard')">
+                        {{ __('Enterprise Overview') }}
+                    </x-responsive-nav-link>
+                @endif
+                
+                @if(in_array(Auth::user()->role, ['owner', 'co_admin', 'resort_manager']))
+                    <x-responsive-nav-link :href="route('shyren-bugak.dashboard')" :active="request()->routeIs('shyren-bugak.dashboard')">
+                        {{ __('Shyren Bugak Resort') }}
+                    </x-responsive-nav-link>
+                @endif
+                
+                @if(in_array(Auth::user()->role, ['owner', 'co_admin', 'hotel_manager']))
+                    <x-responsive-nav-link :href="route('lsv-hotel.dashboard')" :active="request()->routeIs('lsv-hotel.dashboard')">
+                        {{ __('LSV Hotel') }}
+                    </x-responsive-nav-link>
+                @endif
+                
+                @if(in_array(Auth::user()->role, ['owner', 'co_admin', 'agri_manager']))
+                    <x-responsive-nav-link :href="route('lsv-agri.dashboard')" :active="request()->routeIs('lsv-agri.dashboard')">
+                        {{ __('LSV Agri Supply') }}
+                    </x-responsive-nav-link>
+                @endif
+            @endauth
         </div>
 
         <!-- Responsive Settings Options -->
